@@ -16,7 +16,7 @@ services:
       build:
         context: ./
         dockerfile: ./docker/Dockerfile
-      command: composer install
+      command: php console/run worker
       volumes:
         - ./:/var/www/html
       links:
