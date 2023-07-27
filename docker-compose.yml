@@ -5,6 +5,11 @@ services:
     rabbitmq:
       image: rabbitmq:management
       container_name: rabbitmq
+      healthcheck:
+        test: rabbitmq-diagnostics check_port_connectivity
+        interval: 1s
+        timeout: 3s
+        retries: 30
       environment:
         - RABBITMQ_DEFAULT_USER=guest
         - RABBITMQ_DEFAULT_PASS=guest
@@ -16,6 +21,9 @@ services:
       build:
         context: ./
         dockerfile: ./docker/Dockerfile
+      depends_on:
+        rabbitmq:
+          condition: service_healthy
       command: php console/run worker
       volumes:
         - ./:/var/www/html
