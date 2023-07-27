@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+
+include_once 'vendor/autoload.php';
+
+$commands  = [
+    Console\Commands\Last180::class,
+    Console\Commands\Worker::class,
+];
+
+$application = new \Symfony\Component\Console\Application();
+
+foreach ($commands as $class) {
+    if (!class_exists($class)) {
+        throw new RuntimeException(sprintf('Class %s does not exist', $class));
+    }
+    $command = new $class();
+    $application->add($command);
+}
+
+try {
+    $application->run();
+} catch (Exception $e) {
+
+}

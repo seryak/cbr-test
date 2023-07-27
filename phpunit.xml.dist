@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        bootstrap="index.php"
+        executionOrder="random"
+        >
+<php>
+<ini name="memory_limit" value="-1"/>
+<ini name="display_errors" value="true"/>
+</php>
+<testsuites>
+<testsuite name="CBR Common TestSuite">
+    <directory>tests/unit</directory>
+</testsuite>
+</testsuites>
+<coverage includeUncoveredFiles="true">
+
+</coverage>
+        </phpunit>
