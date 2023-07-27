@@ -19,17 +19,18 @@ class RabbitMQClient implements IAMQPClient
 
     public function send(string $message, string $queueName): void
     {
-        $this->channel->queue_declare($queueName, false, false, false, false);
+        $this->channel->queue_declare($queueName, false, true, false, false);
 
-        $msg = new AMQPMessage($message);
+        $msg = new AMQPMessage($message, ['delivery_mode' => 2]);
         $this->channel->basic_publish($msg, '', $queueName);
     }
 
     public function listen(string $queueName, callable $callback): void
     {
+        $this->channel->basic_qos(null, 1, null);
         $this->channel->basic_consume($queueName, '', false, true, false, false, $callback);
 
-        while ($this->channel->is_open) {
+        while ($this->channel->is_open()) {
             $this->channel->wait();
         }
 
