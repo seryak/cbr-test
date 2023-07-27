@@ -29,18 +29,17 @@ class Last180 extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        echo 'tut';
-//        $currentDate = new DateValue(Carbon::today()->format('Y-m-d'));
-//
-//        $queueClient = (new ServiceContainer())->get(IAMQPClient::class);
-//
-//        for ($i=0; $i<180; $i++) {
-//            $message = ['date' => $currentDate->getValue()];
-//            $queueClient->send(json_encode($message, JSON_THROW_ON_ERROR), 'currency-parsing');
-//            $currentDate = new DateValue(Carbon::make($currentDate->getValue())->subDay()->format('Y-m-d'));
-//        }
-//        $queueClient->close();
-//
+        $currentDate = new DateValue(Carbon::today()->format('Y-m-d'));
+
+        $queueClient = (new ServiceContainer())->get(IAMQPClient::class);
+
+        for ($i = 0; $i < 180; $i++) {
+            $message = ['date' => $currentDate->getValue()];
+            $queueClient->send(json_encode($message, JSON_THROW_ON_ERROR), 'currency-parsing');
+            $currentDate = new DateValue(Carbon::make($currentDate->getValue())->subDay()->format('Y-m-d'));
+        }
+        $queueClient->close();
+
         return 0;
     }
 
