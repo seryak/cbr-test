@@ -4,7 +4,6 @@ namespace App\DTO;
 
 use Carbon\Carbon;
 use Exception;
-use Kint\Kint;
 
 class DateValue
 {

@@ -3,7 +3,6 @@
 namespace App\DTO;
 
 use Exception;
-use Kint\Kint;
 use App\Enums\CurrencyCode;
 
 class CurrencyValue
