@@ -17,7 +17,7 @@
 
 Перед первым запуском, выполнить команду
 ```
-docker-compose run app composer install
+docker-compose up -d
 ```
 
 Получить курс валют --currency на дату --date
@@ -28,6 +28,16 @@ docker-compose run app php index.php --currency=USD --date=2022-05-17
 Получить кросс-курс валют --currency в базовой валюте --base на дату --date
 ```
 docker-compose run app php index.php --currency=USD --base=EUR --date=2022-05-17
+```
+
+Запустить воркер
+```
+docker-compose run -d app console/run worker
+```
+
+Запустить команду на получение курсов за последние 180 дней
+```
+docker-compose run app console/run last180
 ```
 
 ## Author
