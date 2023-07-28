@@ -24,7 +24,7 @@ services:
       depends_on:
         rabbitmq:
           condition: service_healthy
-      command: php console/run worker
+      command: composer install && php console/run worker
       volumes:
         - ./:/var/www/html
       links:

@@ -28,7 +28,7 @@ class RabbitMQClient implements IAMQPClient
     public function listen(string $queueName, callable $callback): void
     {
         $this->channel->basic_qos(null, 1, null);
-        $this->channel->basic_consume($queueName, '', false, true, false, false, $callback);
+        $this->channel->basic_consume($queueName, '', false, false, false, false, $callback);
 
         while ($this->channel->is_open()) {
             $this->channel->wait();
